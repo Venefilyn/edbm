@@ -11,12 +11,12 @@ function init () {
 $("#current_system").submit(function(e) {
 	e.preventDefault();
 
-	var start_system = $("#start_system").val;
-	var radius = $("#ly_radius").val;
+	var start_system = $("#start_system").val();
+	var radius = $("#ly_radius").val();
 
 	if(check_system(start_system))
 	{
-		var systems [];
+		var systems = [];
 		systems = get_systems_within_radius(start_system, radius);
 	}
 	else
@@ -32,7 +32,7 @@ function get_systems_within_radius (current_system, radius) {
 
 	current_system_data = getObjects($.bmdata.systems, 'name', current_system);
 	$.each($.bmdata.systems, function(index, system) {
-		if(is_system_within_radius(current_system_data, system, radius))
+		if( is_system_within_radius(current_system_data, system, radius) )
 		{
 			$(systems_within_radius).add(system);
 		}
