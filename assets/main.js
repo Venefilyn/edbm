@@ -11,7 +11,7 @@ function init () {
 function load_systems() {
 	$.getJSON('assets/systems.json', function (data) {
 		$.each(data, function(index, system) {
-			system.appendTo($.bmdata.systems)
+			$.bmdata.systems.add(system.name)
 		});
 	});
 }
