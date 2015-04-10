@@ -34,7 +34,7 @@ function get_systems_within_radius (current_system, radius) {
 
 	current_system_data = getObjects($.bmdata.systems, 'name', current_system);
 	$.each($.bmdata.systems, function(index, system) {
-		if( is_system_within_radius(current_system_data[0], system[0], radius) )
+		if( is_system_within_radius(current_system_data[0], system, radius) )
 		{
 			$(systems_within_radius).add(system);
 		}
