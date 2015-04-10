@@ -7,3 +7,15 @@
 	margin:0 auto;
 	padding: 8px;
 }
+.system_info > .downloading{
+	color:#A94442;
+}
+.station_info > .downloading{
+	color:#A94442;
+}
+.system_info > .downloaded{
+	color:#3C763D;
+}
+.station_info > .downloaded{
+	color:#3C763D;
+}

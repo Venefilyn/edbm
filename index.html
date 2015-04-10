@@ -9,8 +9,16 @@
 	<body>
 		<div id="main" class="container">
 			<div class="row">
-				<h1>Elite: Dangerous <small>Black Market finder</small></h1>
+				<div class="page-header">
+					<h1>Elite: Dangerous <small>Black Market finder</small></h1>
+				</div>
 				<p>Here you can find the closest blackmarket to your current location</p>
+				<div class="status">
+					<div class="alert alert-info" role="alert">
+						<strong>Notice:</strong> Downloading System and Station data<br>
+						<span class="system_info downloading"><span class="glyphicon glyphicon-remove"></span>System</span> <span class="station_info downloading"><span class="glyphicon glyphicon-remove"></span></span>
+					</div>
+				</div>
 				<form action="#" id="current_system">
 					<div class="orm-group">
 						<label for="start_system">System</label>
