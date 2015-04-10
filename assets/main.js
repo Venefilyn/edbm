@@ -1,6 +1,9 @@
 jQuery(document).ready(function($) {
 	init();
-	check_system('Kelish');
+	if(check_system('Kelish'))
+	{
+		alert("It exists");
+	}
 });
 function init () {
 	$.bmdata = {};
@@ -20,7 +23,9 @@ function load_stations() {
 	});
 }
 function check_system (system_name) {
-	getObjects($.bmdata.systems, 'name', system_name);
+	if (getObjects($.bmdata.systems, 'name', system_name)).length > 0){
+		return true;
+	}
 }
 function getObjects(obj, key, val) {
     var objects = [];
