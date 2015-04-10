@@ -36,10 +36,10 @@ function get_systems_within_radius (current_system, radius) {
 		if( is_system_within_radius(current_system_data, system, radius) )
 		{
 			++i;
-			console.log(i);
 			$(systems_within_radius).add(system);
 		}
 	});
+	console.log(i);
 	console.log(systems_within_radius);
 }
 function is_system_within_radius (cur_system, system, radius) {
