@@ -30,10 +30,11 @@ $("#current_system").submit(function(e) {
 
 function get_systems_within_radius (current_system, radius) {
 	var current_system_data = [];
-	var systems_within_radius = [];
+	var systems_within_radius = {};
 
 	current_system_data = getObjects($.bmdata.systems, 'name', current_system);
 	$.each($.bmdata.systems, function(index, system) {
+
 		if( is_system_within_radius(current_system_data[0], system, radius) )
 		{
 			$(systems_within_radius).push(system);
@@ -44,7 +45,7 @@ function get_systems_within_radius (current_system, radius) {
 }
 function is_system_within_radius (cur_system, system, radius) {
 	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
-	if(radius > vector)
+	if(radius > vector && system.id != cur_system.id)
 	{
 		console.log(system);
 		console.log(vector);
