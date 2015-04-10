@@ -14,9 +14,9 @@ function load_systems() {
 	});
 }
 function load_stations() {
-	$.bmdata = { systems:[] };
+	$.bmdata = { stations:[] };
 	$.getJSON('assets/stations_lite.json', function (data) {
-		$.bmdata.systems = data
+		$.bmdata.stations = data
 	});
 }
 function check_system (system_name) {
