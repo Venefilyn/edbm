@@ -26,6 +26,7 @@ function check_system (system_name) {
 	if (getObjects($.bmdata.systems, 'name', system_name).length > 0){
 		return true;
 	}
+	return false;
 }
 function getObjects(obj, key, val) {
     var objects = [];
