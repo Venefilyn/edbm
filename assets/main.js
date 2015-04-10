@@ -37,6 +37,7 @@ function get_systems_within_radius (current_system, radius) {
 			$(systems_within_radius).add(system);
 		}
 	});
+	console.log(systems_within_radius);
 }
 function is_system_within_radius (cur_system, system, radius) {
 	if(radius > Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2)))
