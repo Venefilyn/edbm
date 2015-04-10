@@ -20,7 +20,7 @@ function load_stations() {
 	});
 }
 function check_system (system_name) {
-	getObjects($.bmdata.systems, 'name', system_name)M
+	getObjects($.bmdata.systems, 'name', system_name);
 }
 function getObjects(obj, key, val) {
     var objects = [];
