@@ -4,19 +4,17 @@ jQuery(document).ready(function($) {
 function init () {
 	$.bmdata = {};
 	load_systems();
-	if ($.bmdata.systems ) {};
 	alert($.bmdata.systems)
 	//load_stations();
 }
 function load_systems() {
+	$.bmdata = { systems:[] };
 	$.getJSON('assets/systems.json', function (data) {
-		$.each(data, function(index, system) {
-			$.bmdata.systems.add(system.name)
-		});
+		$.bmdata.systems = data
 	});
 }
 function load_stations() {
-	$.getJSON("http://eddb.io/archive/v3/stations_lite.json", function( data ) {
+	$.getJSON("assets/stations_lite.json", function(data) {
 		var items = [];
 	});
 }
