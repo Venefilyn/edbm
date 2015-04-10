@@ -12,7 +12,7 @@ $("#current_system").submit(function(e) {
 	e.preventDefault();
 
 	var start_system = $("#start_system").val();
-	var radius = $("#ly_radius").val();
+	var radius = 25; // $("#ly_radius").val();
 
 	if(check_system(start_system))
 	{
