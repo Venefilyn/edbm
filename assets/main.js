@@ -39,7 +39,7 @@ function get_systems_within_radius (current_system, radius) {
 	});
 }
 function is_system_within_radius (cur_system, system, radius) {
-	if(radius > sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2)))
+	if(radius > Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2)))
 	{
 		return true;
 	}
