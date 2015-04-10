@@ -16,6 +16,8 @@ $("#current_system").submit(function(e) {
 
 	if(check_system(start_system))
 	{
+		console.log("Cur system: " + start_system);
+		console.log("Radius: " + radius);
 		var systems = [];
 		systems = get_systems_within_radius(start_system, radius);
 	}
