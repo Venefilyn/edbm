@@ -1,11 +1,11 @@
 jQuery(document).ready(function($) {
 	init();
+	check_system('Kelish');
 });
 function init () {
 	$.bmdata = {};
 	load_systems();
-	alert($.bmdata.systems)
-	//load_stations();
+	load_stations();
 }
 function load_systems() {
 	$.bmdata = { systems:[] };
@@ -14,10 +14,23 @@ function load_systems() {
 	});
 }
 function load_stations() {
-	$.getJSON("assets/stations_lite.json", function(data) {
-		var items = [];
+	$.bmdata = { systems:[] };
+	$.getJSON('assets/stations_lite.json', function (data) {
+		$.bmdata.systems = data
 	});
 }
 function check_system (system_name) {
-	// body...
+	getObjects($.bmdata.systems, 'name', system_name)M
+}
+function getObjects(obj, key, val) {
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getObjects(obj[i], key, val));
+        } else if (i == key && obj[key] == val) {
+            objects.push(obj);
+        }
+    }
+    return objects;
 }
