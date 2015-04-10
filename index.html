@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Elite: Dangerous - Black Market finder</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/main.min.css">
+
+	</head>
+	<body>
+		<div id="main">
+			<h1>Elite: Dangerous <small>Black Market finder</small></h1>
+			<p>Here you can find the closest blackmarket to your current location</p>
+			<form action="#">
+				<div class="orm-group">
+					<label for="start_system">System</label>
+					<input type="text" class="form-control" id="start_system" name="start_system" placeholder="Enter current system name">
+				</div>
+				<div class="orm-group">
+					<label class="radio-inline">
+						<input type="radio" name="ly_radius" value="25"> 25 Ly
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="ly_radius" value="35"> 35 Ly
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="ly_radius" value="45"> 45 Ly
+					</label>
+				</div>
+				<div class="orm-group">
+					<input type="submit" value="Search" class="btn btn-default">
+				</div>
+			</form>
+		</div>
+		<div id="footer">
+			<small>Copyright by <a href="https://spytec.se">SpyTec</a> - Data by <a href="http://eddb.io">EDDB</a></small>
+		</div>
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="assets/main.js"></script>
+	</body>
+</html>
