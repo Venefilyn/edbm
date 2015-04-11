@@ -53,7 +53,7 @@ function get_systems_within_radius (current_system, radius) {
 	results.append('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
 	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 	$.each(systems_with_blackmarket, function(index, system) {
-		$.each(getObjects(stations_with_blackmarket, 'system_id', system.id), function(index, station) {
+		$.each(stations_with_blackmarket, function(index, station) {
 			console.log(station);
 			if(station.has_blackmarket)
 			{
