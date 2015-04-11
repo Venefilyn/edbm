@@ -62,20 +62,27 @@ function get_systems_within_radius (current_system, radius) {
 	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 
 	table = $("#results table");
+	
+	systems_with_blackmarket.sort(sort_stars_by_distance);
 
 	$.each(systems_with_blackmarket, function(index, system) {
 		$.each(system.stations, function(index, station) {
 			if(station.has_blackmarket)
 			{
-				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(current_system_data[0], system) + ' Ly</td><td>' + function(){if(station.distance_to_star == null){return "--"}else{return station.distance_to_star}} + ' Ls</td><td>Yes</td>');
+				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + Math.round10(distance_to_star(current_system_data[0], system), -2) + ' Ly</td><td>' + $(function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}}) + '</td><td>Yes</td>');
 			}
 			else
 			{
-				table.append('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(current_system_data[0], system) + ' Ly</td><td>' + function(){if(station.distance_to_star == null){return "--"}else{return station.distance_to_star}} + ' Ls</td><td>Maybe</td>');
+				table.append('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(current_system_data[0], system) + ' Ly</td><td>' + $(function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}}) + '</td><td>Maybe</td>');
 			}
 		});
 	});
 	results.append('</tbody></table>');
+}
+function sort_stars_by_distance(a, b){
+	var aDistance = distance_to_star(a);
+	var bDistance = distance_to_star(b); 
+	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
 }
 function is_system_within_radius (cur_system, system, radius) {
 	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
@@ -138,3 +145,38 @@ function getObjects(obj, key, val) {
     }
     return objects;
 }
+(function() {
+  /**
+   * Decimal adjustment of a number.
+   *
+   * @param {String}  type  The type of adjustment.
+   * @param {Number}  value The number.
+   * @param {Integer} exp   The exponent (the 10 logarithm of the adjustment base).
+   * @returns {Number} The adjusted value.
+   */
+  function decimalAdjust(type, value, exp) {
+    // If the exp is undefined or zero...
+    if (typeof exp === 'undefined' || +exp === 0) {
+      return Math[type](value);
+    }
+    value = +value;
+    exp = +exp;
+    // If the value is not a number or the exp is not an integer...
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+      return NaN;
+    }
+    // Shift
+    value = value.toString().split('e');
+    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+    // Shift back
+    value = value.toString().split('e');
+    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+  }
+
+  // Decimal round
+  if (!Math.round10) {
+    Math.round10 = function(value, exp) {
+      return decimalAdjust('round', value, exp);
+    };
+  }
+})();
