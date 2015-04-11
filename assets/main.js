@@ -55,6 +55,10 @@ function get_systems_within_radius (current_system, radius) {
 	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 	$.each(systems_with_blackmarket, function(index, system) {
 		$.each(stations_with_blackmarket, function(index, stations) {
+			if(getObjects($.bmdata.systems, 'system_id', system.id).length > 0)
+			{
+				continue;
+			}
 			$.each(stations, function(index, station) {
 				console.log(station);
 				if(station.has_blackmarket)
