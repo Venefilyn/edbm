@@ -45,6 +45,8 @@ function get_systems_within_radius (current_system, radius) {
 			}
 		}
 	});
+	console.log(systems_with_blackmarket);
+	console.log(stations_with_blackmarket);
 	results = $("#results");
 	results.html();
 	results.add('<h2>Systems with black market</h2>');
