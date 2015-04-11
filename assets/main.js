@@ -72,7 +72,7 @@ function get_systems_within_radius (current_system, radius) {
 			});
 		});
 	});
-	results.append('</tbody></table>');
+	//results.append('</tbody></table>');
 }
 function is_system_within_radius (cur_system, system, radius) {
 	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
