@@ -10,7 +10,14 @@ function init () {
 
 $("#current_system").submit(function(e) {
 	e.preventDefault();
+	var blob = new Blob([seperateWorker()]);
+	var blobURL = window.URL.createObjectURL(blob);
 
+	var worker = new Worker(blobURL);
+	worker.postMessage();
+});
+
+function seperateWorker(){
 	var start_system = $("#start_system").val();
 	var radius = 25; // $("#ly_radius").val();
 
@@ -26,7 +33,7 @@ $("#current_system").submit(function(e) {
 		console.log(start_system + " doesn't exist");
 		//Add feedback to user
 	}
-});
+}
 
 function get_systems_within_radius (current_system, radius) {
 	var current_system_data = [];
@@ -53,6 +60,7 @@ function get_systems_within_radius (current_system, radius) {
 	results.append('<h2>Systems with black market</h2>');
 	results.append('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
 	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
+
 	$.each(systems_with_blackmarket, function(index, system) {
 		$.each(stations_with_blackmarket, function(index, stations) {
 			var selected_stations = getObjects($.bmdata.systems, 'system_id', system.id)
