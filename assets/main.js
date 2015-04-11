@@ -36,7 +36,6 @@ function seperateWorker(){
 }
 
 function get_systems_within_radius (current_system, radius) {
-	var $.bmdata.current_system_data = [];
 	var systems_with_blackmarket = [];
 
 	$.bmdata.current_system_data = getObjects($.bmdata.systems, 'name', current_system);
