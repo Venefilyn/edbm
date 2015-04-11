@@ -39,23 +39,20 @@ function get_systems_within_radius (current_system, radius) {
 		if( is_system_within_radius(current_system_data[0], system, radius) )
 		{
 			stations_with_blackmarket = system_stations_with_black_market(system);
+			console.log(stations_with_blackmarket);
 			if(system_stations_with_black_market(system).length > 0)
 			{
 				systems_with_blackmarket.push(system);
 			}
 		}
 	});
-	console.log(systems_with_blackmarket);
-	console.log(stations_with_blackmarket);
 	results = $("#results");
 	results.html();
 	results.add('<h2>Systems with black market</h2>');
 	results.add('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
 	results.add('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 	$.each(systems_with_blackmarket, function(index, system) {
-		console.log(system);
 		$.each(getObjects(stations_with_blackmarket, 'system_id', system.id), function(index, station) {
-			console.log(station);
 			if(station.has_blackmarket)
 			{
 				results.add('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Yes</td>');
