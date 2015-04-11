@@ -38,13 +38,14 @@ function get_systems_within_radius (current_system, radius) {
 
 		if( is_system_within_radius(current_system_data[0], system, radius) )
 		{
-			stations_with_blackmarket = system_stations_with_black_market(system);
-			$.each(stations_with_blackmarket, function(index, station_with_blackmarket) {
-				if(system_stations_with_black_market(system).length > 0)
-				{
-					systems_with_blackmarket.push(system);
-				}
-			});
+			var station_with_blackmarket = system_stations_with_black_market(system);
+
+			// If there are stations
+			if(station_with_blackmarket.length > 0)
+			{
+				systems_with_blackmarket.push(system);
+				stations_with_blackmarket.push(station_with_blackmarket);
+			}
 		}
 	});
 	results = $("#results");
