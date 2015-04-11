@@ -57,12 +57,20 @@ function load_systems() {
 	$.bmdata = { systems:[] };
 	$.getJSON('assets/systems.json', function (data) {
 		$.bmdata.systems = data
+	}).done(function() {
+		var system_info = $("#system_info");
+		system_info.removeClass('downloading').addClass('downloaded');
+		system_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 	});
 }
 function load_stations() {
 	$.bmdata = { stations:[] };
 	$.getJSON('assets/stations_lite.json', function (data) {
 		$.bmdata.stations = data
+	}).done(function() {
+		var station_info = $("#station_info");
+		station_info.removeClass('downloading').addClass('downloaded');
+		station_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 	});
 }
 function check_system (system_name) {
