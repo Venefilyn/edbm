@@ -10,7 +10,11 @@ function init () {
 
 $("#current_system").submit(function(e) {
 	e.preventDefault();
+	var worker = new Worker(seperateWorker());
+	worker.postMessage();
+});
 
+function seperateWorker(){
 	var start_system = $("#start_system").val();
 	var radius = 25; // $("#ly_radius").val();
 
@@ -26,7 +30,7 @@ $("#current_system").submit(function(e) {
 		console.log(start_system + " doesn't exist");
 		//Add feedback to user
 	}
-});
+}
 
 function get_systems_within_radius (current_system, radius) {
 	var current_system_data = [];
