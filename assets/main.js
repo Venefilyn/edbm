@@ -80,8 +80,8 @@ function get_systems_within_radius (current_system, radius) {
 	results.append('</tbody></table>');
 }
 function sort_stars_by_distance(a, b){
-	var aDistance = distance_to_star(a);
-	var bDistance = distance_to_star(b); 
+	var aDistance = distance_to_star(current_system_data[0], a);
+	var bDistance = distance_to_star(current_system_data[0], b); 
 	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
 }
 function is_system_within_radius (cur_system, system, radius) {
