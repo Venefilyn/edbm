@@ -40,10 +40,8 @@ function get_systems_within_radius (current_system, radius) {
 		{
 			stations_with_blackmarket = system_stations_with_black_market(system);
 			$.each(stations_with_blackmarket, function(index, station_with_blackmarket) {
-				 console.log("before if-statement: " + stations_with_blackmarket);
 				if(system_stations_with_black_market(system).length > 0)
 				{
-					console.log("after if-statement: " + stations_with_blackmarket);
 					systems_with_blackmarket.push(system);
 				}
 			});
