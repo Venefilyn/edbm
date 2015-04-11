@@ -38,48 +38,42 @@ function seperateWorker(){
 function get_systems_within_radius (current_system, radius) {
 	var current_system_data = [];
 	var systems_with_blackmarket = [];
-	var stations_with_blackmarket = [];
 
 	current_system_data = getObjects($.bmdata.systems, 'name', current_system);
 	$.each($.bmdata.systems, function(index, system) {
 
 		if( is_system_within_radius(current_system_data[0], system, radius) )
 		{
-			var station_with_blackmarket = system_stations_with_black_market(system);
+			var stations_with_blackmarket = system_stations_with_black_market(system);
 
 			// If there are stations
 			if(station_with_blackmarket.length > 0)
 			{
+				system.stations = stations_with_blackmarket;
 				systems_with_blackmarket.push(system);
-				stations_with_blackmarket.push(station_with_blackmarket);
 			}
 		}
 	});
+
 	results = $("#results");
 	results.html();
 	results.append('<h2>Systems with black market</h2>');
-	results.append('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
+	results.append('<p>' + systems_with_blackmarket.length + ' systems with a black market</p>');
 	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 
 	$.each(systems_with_blackmarket, function(index, system) {
-		$.each(stations_with_blackmarket, function(index, stations) {
-			var selected_stations = getObjects($.bmdata.systems, 'system_id', system.id)
-			if(selected_stations.length > 0)
+		$.each(system.stations, function(index, station) {
+			if(station.has_blackmarket)
 			{
-				$.each(selected_stations, function(index, station) {
-					console.log(station);
-					if(station.has_blackmarket)
-					{
-						results.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Yes</td>');
-					}
-					else
-					{
-						results.append('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Maybe</td>');
-					}
-				});
+				results.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Yes</td>');
+			}
+			else
+			{
+				results.append('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Maybe</td>');
 			}
 		});
 	});
+	//Commented because it appended it before each-loop finished
 	//results.append('</tbody></table>');
 }
 function is_system_within_radius (cur_system, system, radius) {
