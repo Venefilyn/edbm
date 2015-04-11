@@ -30,28 +30,60 @@ $("#current_system").submit(function(e) {
 
 function get_systems_within_radius (current_system, radius) {
 	var current_system_data = [];
-	var systems_within_radius = [];
+	var systems_with_blackmarket = [];
+	var stations_with_blackmarket = [];
 
 	current_system_data = getObjects($.bmdata.systems, 'name', current_system);
 	$.each($.bmdata.systems, function(index, system) {
 
 		if( is_system_within_radius(current_system_data[0], system, radius) )
 		{
-			systems_within_radius.push(system);
+			stations_with_blackmarket = system_stations_with_black_market(system);
+			if(system_stations_with_black_market(system).length > 0)
+			{
+				systems_with_blackmarket.push(system);
+			}
 		}
 	});
-	console.log("Systems within radius: " + systems_within_radius.length);
-	console.log(systems_within_radius);
+	results = $("#results");
+	results.add('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
+	results.add('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
+	$.each(systems_with_blackmarket, function(index, system) {
+		$.each(getObjects(stations_with_blackmarket, 'system_id', system.id), function(index, station) {
+			if(station.has_blackmarket)
+			{
+				results.add('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Yes</td>');
+			}
+			else
+			{
+				results.add('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Maybe</td>');
+			}
+		});
+	});
+	results.add('</tbody></table>');
 }
 function is_system_within_radius (cur_system, system, radius) {
 	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 	if(radius > vector && system.id != cur_system.id)
 	{
-		console.log(system);
-		console.log(vector);
 		return true;
 	}
 	return false;
+}
+function system_stations_with_black_market(system) {
+	var stations_in_systems = getObjects($.bmdata.stations, 'system_id', system.id)
+	var stations_with_blackmarket = [];
+
+	$.each(stations_in_systems, function(index, station) {
+		if( station.has_blackmarket == true || station.has_blackmarket == null)
+		{
+			stations_with_blackmarket.push(station);
+		}
+	});
+	return stations_with_blackmarket;
+}
+function distance_to_star (cur_system, system) {
+	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 }
 function load_systems() {
 	$.bmdata = { systems:[] };
