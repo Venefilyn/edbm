@@ -68,11 +68,11 @@ function get_systems_within_radius (current_system, radius) {
 		$.each(system.stations, function(index, station) {
 			if(station.has_blackmarket)
 			{
-				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "--"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system_data[0], system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
+				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system_data[0], system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
 			}
 			else
 			{
-				table.append('<tr><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "--"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system_data[0], system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
+				table.append('<tr><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system_data[0], system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
 			}
 		});
 	});
