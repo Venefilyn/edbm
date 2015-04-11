@@ -51,22 +51,22 @@ function get_systems_within_radius (current_system, radius) {
 	});
 	results = $("#results");
 	results.html();
-	results.add('<h2>Systems with black market</h2>');
-	results.add('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
-	results.add('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
+	results.append('<h2>Systems with black market</h2>');
+	results.append('<p>' + stations_with_blackmarket.length + ' stations with black market found in ' + systems_with_blackmarket.length + '  systems</p>');
+	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 	$.each(systems_with_blackmarket, function(index, system) {
 		$.each(getObjects(stations_with_blackmarket, 'system_id', system.id), function(index, station) {
 			if(station.has_blackmarket)
 			{
-				results.add('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Yes</td>');
+				results.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Yes</td>');
 			}
 			else
 			{
-				results.add('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Maybe</td>');
+				results.append('<tr class="info"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + station.allegiance + '</td><td>' + distance_to_star(start_system, system) + '</td><td>' + station.distance_to_star + '</td><td>Maybe</td>');
 			}
 		});
 	});
-	results.add('</tbody></table>');
+	results.append('</tbody></table>');
 }
 function is_system_within_radius (cur_system, system, radius) {
 	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
