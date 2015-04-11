@@ -19,7 +19,7 @@ $("#current_system").submit(function(e) {
 
 function seperateWorker(){
 	var start_system = $("#start_system").val();
-	var radius = 25; // $("#ly_radius").val();
+	var radius = $('input[name=ly_radius]:checked', '#current_system').val();
 
 	if(check_system(start_system))
 	{
