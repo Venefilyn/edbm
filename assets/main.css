@@ -6,7 +6,8 @@
 	padding: 8px;
 }
 #footer small{
-	margin:0 auto;
+	display:block;
+	text-align:center;
 }
 .downloading{
 	color:#A94442;
