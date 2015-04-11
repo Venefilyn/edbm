@@ -47,7 +47,7 @@ function get_systems_within_radius (current_system, radius) {
 			var stations_with_blackmarket = system_stations_with_black_market(system);
 
 			// If there are stations
-			if(station_with_blackmarket.length > 0)
+			if(stations_with_blackmarket.length > 0)
 			{
 				system.stations = stations_with_blackmarket;
 				systems_with_blackmarket.push(system);
