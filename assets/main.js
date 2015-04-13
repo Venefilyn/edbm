@@ -77,7 +77,7 @@ function get_sys_within_radius (current_sy, radius) {
 function load_sys() {
 	$.bmdata.sys_by_id = {};
 	$.bmdata.sys_by_name = {};
-	$.getJSON('assets/sys.json', function (data) {
+	$.getJSON('assets/systems.json', function (data) {
 		for(var i in data){
 			var sy = data[i];
 			$.bmdata.sys_by_id[sy.id] = sy;
@@ -91,7 +91,7 @@ function load_sys() {
 }
 function load_sts() {
 	$.bmdata.sts_by_sy_id = {};
-	$.getJSON('assets/sts_lite.json', function (data) {
+	$.getJSON('assets/stations_lite.json', function (data) {
 		for(var i in data){
 			var station = data[i];
 			if (typeof($.bmdata.sts_by_sy_id[station.sy_id]) == 'undefined')
