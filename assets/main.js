@@ -41,7 +41,7 @@ function get_systems_within_radius (current_system, radius) {
 	$.bmdata.current_system_data = $.bmdata.systems_by_name[current_system];
 	for(var system in $.bmdata.systems_by_id) {
 
-		if( is_system_within_radius($.bmdata.current_system_data[0], system, radius) )
+		if( is_system_within_radius($.bmdata.current_system_data, system, radius) )
 		{
 			var stations_with_blackmarket = system_stations_with_black_market(system);
 
