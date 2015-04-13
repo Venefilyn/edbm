@@ -10,11 +10,11 @@ function init () {
 
 $("#current_system").submit(function(e) {
 	e.preventDefault();
-	
+
 	var start_system = $("#start_system").val().toLowerCase();
 	var radius = $('input[name=ly_radius]:checked', '#current_system').val();
 
-	if(check_system(start_system))
+	if($.bmdata.current_system_data = check_system(start_system))
 	{
 		console.log("Cur system: " + start_system);
 		console.log("Radius: " + radius);
@@ -31,7 +31,6 @@ $("#current_system").submit(function(e) {
 function get_systems_within_radius (current_system, radius) {
 	var systems_with_blackmarket = [];
 
-	$.bmdata.current_system_data = $.bmdata.systems_by_name[current_system];
 	for(var system in $.bmdata.systems_by_id) {
 
 		if( is_system_within_radius($.bmdata.current_system_data, system, radius) )
@@ -135,10 +134,7 @@ function distance_to_star (cur_system, system) {
 	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 }
 function check_system (system_name) {
-	if ((system_name in $.bmdata.systems_by_name)){
-		return true;
-	}
-	return false;
+	return $.bmdata.systems_by_name[name.toLowerCase()];
 }
 function getObjects(obj, key, val) {
     var objects = [];
