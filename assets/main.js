@@ -94,13 +94,13 @@ function load_sts() {
 	$.getJSON('assets/stations_lite.json', function (data) {
 		for(var i in data){
 			var st = data[i];
-			if (typeof($.bmdata.sts_by_sy_id[st.sy_id]) == 'undefined')
+			if (typeof($.bmdata.sts_by_sy_id[st.system_id]) == 'undefined')
 			{
-				$.bmdata.sts_by_sy_id[st.sy_id] = [];
+				$.bmdata.sts_by_sy_id[st.system_id] = [];
 			}
 			else
 			{
-				$.bmdata.sts_by_sy_id[st.sy_id].push(st);
+				$.bmdata.sts_by_sy_id[st.system_id].push(st);
 			}
 		}
 	}).done(function() {
