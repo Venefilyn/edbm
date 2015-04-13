@@ -41,11 +41,14 @@ function get_systems_within_radius (current_system, radius) {
 			// If there are stations
 			if(stations_with_blackmarket.length > 0)
 			{
+				console.log("There was a black market, pushing it into systems_with_blackmarket");
 				system.stations = stations_with_blackmarket;
 				systems_with_blackmarket.push(system);
 			}
 		}
 	};
+
+	console.log("Systems with blackmarket: " + systems_with_blackmarket);
 
 	results = $("#results");
 	results.html('');
