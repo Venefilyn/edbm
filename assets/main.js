@@ -92,7 +92,7 @@ function is_system_within_radius (cur_system, system, radius) {
 	return false;
 }
 function system_stations_with_black_market(system) {
-	var stations_in_systems = getObjects($.bmdata.stations, 'system_id', system.id)
+	var stations_in_systems = $.bmdata.stations_by_system_id[system.id];
 	var stations_with_blackmarket = [];
 
 	$.each(stations_in_systems, function(index, station) {
@@ -108,7 +108,11 @@ function distance_to_star (cur_system, system) {
 }
 function load_systems() {
 	$.getJSON('assets/systems.json', function (data) {
-		$.bmdata.systems = data
+		for(var i in data){
+			var systems = data[i];
+			$.bmdata.systems_by_id[systems.id] = systems;
+			$.bmdata.systems_by_name[systems.name] = systems;
+		}
 	}).done(function() {
 		var system_info = $(".system_info");
 		system_info.removeClass('downloading').addClass('downloaded');
@@ -117,7 +121,17 @@ function load_systems() {
 }
 function load_stations() {
 	$.getJSON('assets/stations_lite.json', function (data) {
-		$.bmdata.stations = data
+		for(var i in data){
+			var station = data[i];
+			if (typeof($.bmdata.stations_by_system_id[station.system_id]) == 'undefined')
+			{
+				$.bmdata.stations_by_system_id[station.system_id] = [];
+			}
+			else
+			{
+				$.bmdata.stations_by_system_id[station.system_id].push(station);
+			}
+		}
 	}).done(function() {
 		var station_info = $(".station_info");
 		station_info.removeClass('downloading').addClass('downloaded');
