@@ -91,7 +91,7 @@ function load_sys() {
 }
 function load_sts() {
 	$.bmdata.sts_by_sy_id = {};
-	$.getJSON('assets/sts_lite.json', function (data) {
+	$.getJSON('assets/stations_lite.json', function (data) {
 		for(var i in data){
 			var st = data[i];
 			if (typeof($.bmdata.sts_by_sy_id[st.sy_id]) == 'undefined')
