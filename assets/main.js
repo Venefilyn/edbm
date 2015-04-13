@@ -14,7 +14,8 @@ $("#current_system").submit(function(e) {
 	var start_system = $("#start_system").val().toLowerCase();
 	var radius = $('input[name=ly_radius]:checked', '#current_system').val();
 
-	$.bmdata.current_system = check_system(start_system)
+	$.bmdata.current_system = check_system(start_system);
+	if(typeof($.bmdata.current_system) == 'object')
 	{
 		console.log("Cur system: " + start_system);
 		console.log("Radius: " + radius);
