@@ -52,7 +52,7 @@ function get_systems_within_radius (current_system, radius) {
 				systems_with_blackmarket.push(system);
 			}
 		}
-	});
+	};
 
 	results = $("#results");
 	results.html('');
