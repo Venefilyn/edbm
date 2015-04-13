@@ -84,7 +84,7 @@ function load_sys() {
 			$.bmdata.sys_by_name[sy.name.toLowerCase()] = sy;
 		}
 	}).done(function() {
-		var sy_info = $(".sy_info");
+		var sy_info = $(".system_info");
 		sy_info.removeClass('downloading').addClass('downloaded');
 		sy_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 	});
