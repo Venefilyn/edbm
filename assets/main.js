@@ -123,7 +123,7 @@ function sy_within_radius (cur_sy, sy, radius) {
 	return false;
 }
 function sy_sts_with_black_market(sy) {
-	console.log("sy_sts_with_black_market: sy: " + sy);
+	console.log("sy_sts_with_black_market: sy: " + sy.name);
 	var sts_in_sys = $.bmdata.sts_by_sy_id[sy.id];
 	console.log("sy_sts_with_black_market: sts_in_sys: " + sts_in_sys);
 	var sts_with_blackmarket = [];
