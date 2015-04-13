@@ -11,8 +11,8 @@ function init () {
 $("#current_sy").submit(function(e) {
 	e.preventDefault();
 
-	var start_sy = $("#start_sy").val().toLowerCase();
-	var radius = $('input[name=ly_radius]:checked', '#current_sy').val();
+	var start_sy = $("#start_system").val().toLowerCase();
+	var radius = $('input[name=ly_radius]:checked', '#current_system').val();
 
 	$.bmdata.current_sy = check_sy(start_sy);
 	if(typeof($.bmdata.current_sy) == 'object')
