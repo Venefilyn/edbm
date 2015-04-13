@@ -4,103 +4,103 @@ jQuery(document).ready(function($) {
 
 function init () {
 	$.bmdata = {};
-	load_systems();
-	load_stations();
+	load_sys();
+	load_sts();
 }
 
-$("#current_system").submit(function(e) {
+$("#current_sy").submit(function(e) {
 	e.preventDefault();
 
-	var start_system = $("#start_system").val().toLowerCase();
-	var radius = $('input[name=ly_radius]:checked', '#current_system').val();
+	var start_sy = $("#start_sy").val().toLowerCase();
+	var radius = $('input[name=ly_radius]:checked', '#current_sy').val();
 
-	$.bmdata.current_system = check_system(start_system);
-	if(typeof($.bmdata.current_system) == 'object')
+	$.bmdata.current_sy = check_sy(start_sy);
+	if(typeof($.bmdata.current_sy) == 'object')
 	{
-		console.log("Cur system: " + start_system);
+		console.log("Cur system: " + start_sy);
 		console.log("Radius: " + radius);
-		var systems = [];
-		systems = get_systems_within_radius(start_system, radius);
+		var sys = [];
+		sys = get_sys_within_radius(start_sy, radius);
 	}
 	else
 	{
-		console.log(start_system + " doesn't exist");
+		console.log(start_sy + " doesn't exist");
 		//Add feedback to user
 	}
 });
 
-function get_systems_within_radius (current_system, radius) {
-	var systems_with_blackmarket = [];
+function get_sys_within_radius (current_sy, radius) {
+	var sys_with_blackmarket = [];
 
-	for(var system_id in $.bmdata.systems_by_id) {
-		system = $.bmdata.systems_by_id[system_id];
-		if( is_system_within_radius($.bmdata.current_system, system, radius) )
+	for(var sy_id in $.bmdata.sys_by_id) {
+		sy = $.bmdata.sys_by_id[sy_id];
+		if( sy_within_radius($.bmdata.current_sy, sy, radius) )
 		{
-			var stations_with_blackmarket = system_stations_with_black_market(system);
+			var sts_with_blackmarket = sy_sts_with_black_market(sy);
 
-			// If there are stations
-			if(stations_with_blackmarket.length > 0)
+			// If there are sts
+			if(sts_with_blackmarket.length > 0)
 			{
-				console.log("There was a black market, pushing it into systems_with_blackmarket");
-				system.stations = stations_with_blackmarket;
-				systems_with_blackmarket.push(system);
+				console.log("There was a black market, pushing it into sys_with_blackmarket");
+				sy.sts = sts_with_blackmarket;
+				sys_with_blackmarket.push(sy);
 			}
 		}
 	};
 
-	console.log("Systems with blackmarket: " + systems_with_blackmarket);
+	console.log("Systems with blackmarket: " + sys_with_blackmarket);
 
 	results = $("#results");
 	results.html('');
-	results.append('<h2>Systems with black market</h2>');
-	results.append('<p>Found ' + systems_with_blackmarket.length + ' systems with a potential black market</p>');
-	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
+	results.append('<h2>sys with black market</h2>');
+	results.append('<p>Found ' + sys_with_blackmarket.length + ' sys with a potential black market</p>');
+	results.append('<table class="table table-striped table-bordered"><thead><th>sy</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 
 	table = $("#results table");
 	
-	systems_with_blackmarket.sort(sort_stars_by_distance);
+	sys_with_blackmarket.sort(sort_stars_by_distance);
 
-	$.each(systems_with_blackmarket, function(index, system) {
-		$.each(system.stations, function(index, station) {
+	$.each(sys_with_blackmarket, function(index, sy) {
+		$.each(sy.sts, function(index, station) {
 			if(station.has_blackmarket)
 			{
-				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system, system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
+				table.append('<tr class="success"><td>' + sy.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
 			}
 			else
 			{
-				table.append('<tr><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system, system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
+				table.append('<tr><td>' + sy.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
 			}
 		});
 	});
 	results.append('</tbody></table>');
 }
-function load_systems() {
-	$.bmdata.systems_by_id = {};
-	$.bmdata.systems_by_name = {};
-	$.getJSON('assets/systems.json', function (data) {
+function load_sys() {
+	$.bmdata.sys_by_id = {};
+	$.bmdata.sys_by_name = {};
+	$.getJSON('assets/sys.json', function (data) {
 		for(var i in data){
-			var system = data[i];
-			$.bmdata.systems_by_id[system.id] = system;
-			$.bmdata.systems_by_name[system.name.toLowerCase()] = system;
+			var sy = data[i];
+			$.bmdata.sys_by_id[sy.id] = sy;
+			$.bmdata.sys_by_name[sy.name.toLowerCase()] = sy;
 		}
 	}).done(function() {
-		var system_info = $(".system_info");
-		system_info.removeClass('downloading').addClass('downloaded');
-		system_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
+		var sy_info = $(".sy_info");
+		sy_info.removeClass('downloading').addClass('downloaded');
+		sy_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 	});
 }
-function load_stations() {
-	$.bmdata.stations_by_system_id = {};
-	$.getJSON('assets/stations_lite.json', function (data) {
+function load_sts() {
+	$.bmdata.sts_by_sy_id = {};
+	$.getJSON('assets/sts_lite.json', function (data) {
 		for(var i in data){
 			var station = data[i];
-			if (typeof($.bmdata.stations_by_system_id[station.system_id]) == 'undefined')
+			if (typeof($.bmdata.sts_by_sy_id[station.sy_id]) == 'undefined')
 			{
-				$.bmdata.stations_by_system_id[station.system_id] = [];
+				$.bmdata.sts_by_sy_id[station.sy_id] = [];
 			}
 			else
 			{
-				$.bmdata.stations_by_system_id[station.system_id].push(station);
+				$.bmdata.sts_by_sy_id[station.sy_id].push(station);
 			}
 		}
 	}).done(function() {
@@ -110,37 +110,37 @@ function load_stations() {
 	});
 }
 function sort_stars_by_distance(a, b){
-	var aDistance = distance_to_star($.bmdata.current_system, a);
-	var bDistance = distance_to_star($.bmdata.current_system, b); 
+	var aDistance = distance_to_star($.bmdata.current_sy, a);
+	var bDistance = distance_to_star($.bmdata.current_sy, b); 
 	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
 }
-function is_system_within_radius (cur_system, system, radius) {
-	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
-	if(radius > vector && system.id != cur_system.id)
+function sy_within_radius (cur_sy, sy, radius) {
+	vector = Math.sqrt( Math.pow((sy.x - cur_sy.x), 2) + Math.pow((sy.y - cur_sy.y), 2) + Math.pow((sy.z - cur_sy.z), 2));
+	if(radius > vector && sy.id != cur_sy.id)
 	{
 		return true;
 	}
 	return false;
 }
-function system_stations_with_black_market(system) {
-	console.log("system_stations_with_black_market: System " + system);
-	var stations_in_systems = $.bmdata.stations_by_system_id[system.id];
-	console.log("system_stations_with_black_market: Stations in systems" + stations_in_systems);
-	var stations_with_blackmarket = [];
+function sy_sts_with_black_market(sy) {
+	console.log("sy_sts_with_black_market: sy: " + sy);
+	var sts_in_sys = $.bmdata.sts_by_sy_id[sy.id];
+	console.log("sy_sts_with_black_market: sts_in_sys: " + sts_in_sys);
+	var sts_with_blackmarket = [];
 
-	$.each(stations_in_systems, function(index, station) {	
+	$.each(sts_in_sys, function(index, station) {	
 		if( station.has_blackmarket == true || station.has_blackmarket == null)
 		{
-			stations_with_blackmarket.push(station);
+			sts_with_blackmarket.push(station);
 		}
 	});
-	return stations_with_blackmarket;
+	return sts_with_blackmarket;
 }
-function distance_to_star (cur_system, system) {
-	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
+function distance_to_star (cur_sy, sy) {
+	return Math.sqrt( Math.pow((sy.x - cur_sy.x), 2) + Math.pow((sy.y - cur_sy.y), 2) + Math.pow((sy.z - cur_sy.z), 2));
 }
-function check_system (system_name) {
-	return $.bmdata.systems_by_name[system_name.toLowerCase()];
+function check_sy (sy_name) {
+	return $.bmdata.sys_by_name[sy_name.toLowerCase()];
 }
 function getObjects(obj, key, val) {
     var objects = [];
