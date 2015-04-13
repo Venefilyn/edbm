@@ -124,10 +124,10 @@ function sy_sts_with_bm(sy) {
 	var sts_in_sys = $.bmdata.sts_by_sy_id[sy.id];
 	var sts_with_blackmarket = [];
 
-	for(var st in sts_in_sys) {
-		if( st.has_blackmarket == true || st.has_blackmarket == null)
+	for(var st_id in sts_in_sys) {
+		if( st_id.has_blackmarket == true || st_id.has_blackmarket == null)
 		{
-			sts_with_blackmarket.push(st);
+			sts_with_blackmarket.push($.bmdata.sts_by_sy_id[st_id]);
 		}
 	};
 	return sts_with_blackmarket;
