@@ -8,7 +8,7 @@ function init () {
 	load_sts();
 }
 
-$("#current_sy").submit(function(e) {
+$("#current_system").submit(function(e) {
 	e.preventDefault();
 
 	var start_sy = $("#start_system").val().toLowerCase();
