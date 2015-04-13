@@ -1,3 +1,10 @@
+/**
+* Definition of words
+* =======
+* sy(s) = system(s)
+* st(s) = station(s)
+* bm    = black market
+*/
 jQuery(document).ready(function($) {
 	init();
 });
@@ -38,7 +45,7 @@ function get_sys_within_radius (current_sy, radius) {
 		{
 			var sts_with_blackmarket = sy_sts_with_bm(sy);
 
-			// If there are sts
+			// If there are stations
 			if(sts_with_blackmarket.length > 0)
 			{
 				sy.sts = sts_with_blackmarket;
@@ -125,10 +132,10 @@ function sy_sts_with_bm(sy) {
 	var sts_with_blackmarket = [];
 
 	for(var st_id in sts_in_sys) {
-		st = $.bmdata.sts_by_sy_id[st_id]
+		st = sts_in_sys[st_id]
 		if( st.has_blackmarket == true || st.has_blackmarket == null)
 		{
-			sts_with_blackmarket.push($.bmdata.sts_by_sy_id[st]);
+			sts_with_blackmarket.push(st);
 		}
 	};
 	return sts_with_blackmarket;
