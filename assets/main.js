@@ -120,7 +120,7 @@ function sort_stars_by_distance(a, b){
 }
 function sy_within_radius (cur_sy, sy, radius) {
 	vector = Math.sqrt( Math.pow((sy.x - cur_sy.x), 2) + Math.pow((sy.y - cur_sy.y), 2) + Math.pow((sy.z - cur_sy.z), 2));
-	if(radius > vector && sy.id != cur_sy.id)
+	if(radius > vector)
 	{
 		return true;
 	}
