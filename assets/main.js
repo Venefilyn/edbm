@@ -14,7 +14,7 @@ $("#current_system").submit(function(e) {
 	var start_system = $("#start_system").val().toLowerCase();
 	var radius = $('input[name=ly_radius]:checked', '#current_system').val();
 
-	if($.bmdata.current_system_data = check_system(start_system))
+	if($.bmdata.current_system = check_system(start_system))
 	{
 		console.log("Cur system: " + start_system);
 		console.log("Radius: " + radius);
@@ -33,7 +33,7 @@ function get_systems_within_radius (current_system, radius) {
 
 	for(var system in $.bmdata.systems_by_id) {
 
-		if( is_system_within_radius($.bmdata.current_system_data, system, radius) )
+		if( is_system_within_radius($.bmdata.current_system, system, radius) )
 		{
 			var stations_with_blackmarket = system_stations_with_black_market(system);
 
@@ -60,11 +60,11 @@ function get_systems_within_radius (current_system, radius) {
 		$.each(system.stations, function(index, station) {
 			if(station.has_blackmarket)
 			{
-				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system_data, system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
+				table.append('<tr class="success"><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system, system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
 			}
 			else
 			{
-				table.append('<tr><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system_data, system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
+				table.append('<tr><td>' + system.name + '</td><td>' + station.name + '</td><td>' + ($.fn.func = function(){if(station.allegiance == null){return "Unknown"}else{return station.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_system, system), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(station.distance_to_star == null){return "--"}else{return Math.round(station.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
 			}
 		});
 	});
@@ -106,8 +106,8 @@ function load_stations() {
 	});
 }
 function sort_stars_by_distance(a, b){
-	var aDistance = distance_to_star($.bmdata.current_system_data, a);
-	var bDistance = distance_to_star($.bmdata.current_system_data, b); 
+	var aDistance = distance_to_star($.bmdata.current_system, a);
+	var bDistance = distance_to_star($.bmdata.current_system, b); 
 	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
 }
 function is_system_within_radius (cur_system, system, radius) {
