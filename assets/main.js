@@ -123,7 +123,9 @@ function is_system_within_radius (cur_system, system, radius) {
 	return false;
 }
 function system_stations_with_black_market(system) {
+	console.log("system_stations_with_black_market: System " + system);
 	var stations_in_systems = $.bmdata.stations_by_system_id[system.id];
+	console.log("system_stations_with_black_market: Stations in systems" + stations_in_systems);
 	var stations_with_blackmarket = [];
 
 	$.each(stations_in_systems, function(index, station) {	
