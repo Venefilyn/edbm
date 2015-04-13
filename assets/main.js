@@ -66,7 +66,6 @@ function get_sys_within_radius (current_sy, radius) {
 
 	$.each(sys_with_blackmarket, function(index, sy) {
 		$.each(sy.sts, function(index, st) {
-			console.log("station: " + st);
 			if(st.has_blackmarket)
 			{
 				table.append('<tr class="success"><td>' + sy.name + '</td><td>' + st.name + '</td><td>' + ($.fn.func = function(){if(st.allegiance == null){return "Unknown"}else{return st.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(st.distance_to_star == null){return "--"}else{return Math.round(st.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
