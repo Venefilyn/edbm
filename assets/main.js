@@ -107,7 +107,6 @@ function distance_to_star (cur_system, system) {
 	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 }
 function load_systems() {
-	$.bmdata = { systems:[] };
 	$.getJSON('assets/systems.json', function (data) {
 		$.bmdata.systems = data
 	}).done(function() {
@@ -117,7 +116,6 @@ function load_systems() {
 	});
 }
 function load_stations() {
-	$.bmdata = { stations:[] };
 	$.getJSON('assets/stations_lite.json', function (data) {
 		$.bmdata.stations = data
 	}).done(function() {
