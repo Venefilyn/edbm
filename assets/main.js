@@ -128,12 +128,12 @@ function sy_sts_with_bm(sy) {
 	console.log("sy_sts_with_bm: sts_in_sys: " + sts_in_sys);
 	var sts_with_blackmarket = [];
 
-	$.each(sts_in_sys, function(index, st) {	
+	for(var st in sts_in_sys) {
 		if( st.has_blackmarket == true || st.has_blackmarket == null)
 		{
 			sts_with_blackmarket.push(st);
 		}
-	});
+	};
 	return sts_with_blackmarket;
 }
 function distance_to_star (cur_sy, sy) {
