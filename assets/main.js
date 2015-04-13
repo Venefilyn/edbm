@@ -142,7 +142,7 @@ function distance_to_star (cur_system, system) {
 	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 }
 function check_system (system_name) {
-	if (!system_name.toLowerCase() in $.bmdata.systems_by_name){
+	if ((system_name.toLowerCase() in $.bmdata.systems_by_name)){
 		return true;
 	}
 	return false;
