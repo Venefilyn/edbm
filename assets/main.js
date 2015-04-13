@@ -78,34 +78,6 @@ function get_systems_within_radius (current_system, radius) {
 	});
 	results.append('</tbody></table>');
 }
-function sort_stars_by_distance(a, b){
-	var aDistance = distance_to_star($.bmdata.current_system_data[0], a);
-	var bDistance = distance_to_star($.bmdata.current_system_data[0], b); 
-	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
-}
-function is_system_within_radius (cur_system, system, radius) {
-	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
-	if(radius > vector && system.id != cur_system.id)
-	{
-		return true;
-	}
-	return false;
-}
-function system_stations_with_black_market(system) {
-	var stations_in_systems = $.bmdata.stations_by_system_id[system.id];
-	var stations_with_blackmarket = [];
-
-	$.each(stations_in_systems, function(index, station) {
-		if( station.has_blackmarket == true || station.has_blackmarket == null)
-		{
-			stations_with_blackmarket.push(station);
-		}
-	});
-	return stations_with_blackmarket;
-}
-function distance_to_star (cur_system, system) {
-	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
-}
 function load_systems() {
 	$.bmdata.systems_by_id = {};
 	$.bmdata.systems_by_name = {};
@@ -140,6 +112,34 @@ function load_stations() {
 		station_info.removeClass('downloading').addClass('downloaded');
 		station_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 	});
+}
+function sort_stars_by_distance(a, b){
+	var aDistance = distance_to_star($.bmdata.current_system_data[0], a);
+	var bDistance = distance_to_star($.bmdata.current_system_data[0], b); 
+	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
+}
+function is_system_within_radius (cur_system, system, radius) {
+	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
+	if(radius > vector && system.id != cur_system.id)
+	{
+		return true;
+	}
+	return false;
+}
+function system_stations_with_black_market(system) {
+	var stations_in_systems = $.bmdata.stations_by_system_id[system.id];
+	var stations_with_blackmarket = [];
+
+	$.each(stations_in_systems, function(index, station) {
+		if( station.has_blackmarket == true || station.has_blackmarket == null)
+		{
+			stations_with_blackmarket.push(station);
+		}
+	});
+	return stations_with_blackmarket;
+}
+function distance_to_star (cur_system, system) {
+	return Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 }
 function check_system (system_name) {
 	if (getObjects($.bmdata.systems, 'name', system_name).length > 0){
