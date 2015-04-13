@@ -52,9 +52,9 @@ function get_sys_within_radius (current_sy, radius) {
 
 	results = $("#results");
 	results.html('');
-	results.append('<h2>sys with black market</h2>');
-	results.append('<p>Found ' + sys_with_blackmarket.length + ' sys with a potential black market</p>');
-	results.append('<table class="table table-striped table-bordered"><thead><th>sy</th><th>st</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
+	results.append('<h2>System with black market</h2>');
+	results.append('<p>Found ' + sys_with_blackmarket.length + ' systems with a potential black market</p>');
+	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
 
 	table = $("#results table");
 	
