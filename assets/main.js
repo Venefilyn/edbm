@@ -115,6 +115,9 @@ function sort_stars_by_distance(a, b){
 	return ((aDistance < bDistance) ? -1 : ((aDistance > bDistance) ? 1 : 0));
 }
 function is_system_within_radius (cur_system, system, radius) {
+	console.log("is_system_within_radius: cur_system: " + cur_system)
+	console.log("is_system_within_radius: system: " + system)
+	console.log("is_system_within_radius: radius: " + radius)
 	vector = Math.sqrt( Math.pow((system.x - cur_system.x), 2) + Math.pow((system.y - cur_system.y), 2) + Math.pow((system.z - cur_system.z), 2));
 	if(radius > vector && system.id != cur_system.id)
 	{
