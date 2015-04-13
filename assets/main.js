@@ -41,14 +41,11 @@ function get_sys_within_radius (current_sy, radius) {
 			// If there are sts
 			if(sts_with_blackmarket.length > 0)
 			{
-				console.log("There was a black market, pushing it into sys_with_blackmarket");
 				sy.sts = sts_with_blackmarket;
 				sys_with_blackmarket.push(sy);
 			}
 		}
 	};
-
-	console.log("Systems with blackmarket: " + sys_with_blackmarket);
 
 	results = $("#results");
 	results.html('');
@@ -62,6 +59,7 @@ function get_sys_within_radius (current_sy, radius) {
 
 	$.each(sys_with_blackmarket, function(index, sy) {
 		$.each(sy.sts, function(index, st) {
+			console.log("station: " + st);
 			if(st.has_blackmarket)
 			{
 				table.append('<tr class="success"><td>' + sy.name + '</td><td>' + st.name + '</td><td>' + ($.fn.func = function(){if(st.allegiance == null){return "Unknown"}else{return st.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(st.distance_to_star == null){return "--"}else{return Math.round(st.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
@@ -123,9 +121,7 @@ function sy_within_radius (cur_sy, sy, radius) {
 	return false;
 }
 function sy_sts_with_bm(sy) {
-	console.log("sy_sts_with_bm: sy: " + sy.name);
 	var sts_in_sys = $.bmdata.sts_by_sy_id[sy.id];
-	console.log("sy_sts_with_bm: sts_in_sys: " + sts_in_sys);
 	var sts_with_blackmarket = [];
 
 	for(var st in sts_in_sys) {
