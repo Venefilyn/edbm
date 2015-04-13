@@ -32,8 +32,8 @@ $("#current_system").submit(function(e) {
 function get_systems_within_radius (current_system, radius) {
 	var systems_with_blackmarket = [];
 
-	for(var system in $.bmdata.systems_by_id) {
-
+	for(var system_id in $.bmdata.systems_by_id) {
+		system = $.bmdata.systems_by_id[system_id];
 		if( is_system_within_radius($.bmdata.current_system, system, radius) )
 		{
 			var stations_with_blackmarket = system_stations_with_black_market(system);
