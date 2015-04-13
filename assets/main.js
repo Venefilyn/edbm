@@ -36,7 +36,7 @@ function get_sys_within_radius (current_sy, radius) {
 		sy = $.bmdata.sys_by_id[sy_id];
 		if( sy_within_radius($.bmdata.current_sy, sy, radius) )
 		{
-			var sts_with_blackmarket = sy_sts_with_black_market(sy);
+			var sts_with_blackmarket = sy_sts_with_bm(sy);
 
 			// If there are sts
 			if(sts_with_blackmarket.length > 0)
@@ -104,7 +104,7 @@ function load_sts() {
 			}
 		}
 	}).done(function() {
-		var st_info = $(".st_info");
+		var st_info = $(".station_info");
 		st_info.removeClass('downloading').addClass('downloaded');
 		st_info.children('.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
 	});
@@ -122,10 +122,10 @@ function sy_within_radius (cur_sy, sy, radius) {
 	}
 	return false;
 }
-function sy_sts_with_black_market(sy) {
-	console.log("sy_sts_with_black_market: sy: " + sy.name);
+function sy_sts_with_bm(sy) {
+	console.log("sy_sts_with_bm: sy: " + sy.name);
 	var sts_in_sys = $.bmdata.sts_by_sy_id[sy.id];
-	console.log("sy_sts_with_black_market: sts_in_sys: " + sts_in_sys);
+	console.log("sy_sts_with_bm: sts_in_sys: " + sts_in_sys);
 	var sts_with_blackmarket = [];
 
 	$.each(sts_in_sys, function(index, st) {	
