@@ -58,7 +58,7 @@ function get_sys_within_radius (current_sy, radius) {
 	results.html('');
 	results.append('<h2>System with black market</h2>');
 	results.append('<p>Found ' + sys_with_blackmarket.length + ' systems with a potential black market</p>');
-	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Black Market</th></thead><tbody>');
+	results.append('<table class="table table-striped table-bordered"><thead><th>System</th><th>Station</th><th>Faction</th><th>Distance to star</th><th>Distance from star</th><th>Landing Pad</th><th>Black Market</th></thead><tbody>');
 
 	table = $("#results table");
 	
@@ -68,11 +68,11 @@ function get_sys_within_radius (current_sy, radius) {
 		$.each(sy.sts, function(index, st) {
 			if(st.has_blackmarket)
 			{
-				table.append('<tr class="success"><td>' + sy.name + '</td><td><a href="http://eddb.io/station/' + st.id +  '">' + st.name + '</a></td><td>' + ($.fn.func = function(){if(st.allegiance == null){return "Unknown"}else{return st.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(st.distance_to_star == null){return "--"}else{return Math.round(st.distance_to_star) + ' Ls'}})() + '</td><td>Yes</td>');
+				table.append('<tr class="success"><td>' + sy.name + '</td><td><a href="http://eddb.io/station/' + st.id +  '">' + st.name + '</a></td><td>' + ($.fn.func = function(){if(st.allegiance == null){return "Unknown"}else{return st.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(st.distance_to_star == null){return "--"}else{return Math.round(st.distance_to_star) + ' Ls'}})() + '</td><td>' + ($.fn.func = function(){if(st.max_landing_pad_size == null){return "--"}else{return st.max_landing_pad_size}}) + '</td><td>Yes</td>');
 			}
 			else
 			{
-				table.append('<tr><td>' + sy.name + '</td><td><a href="http://eddb.io/station/' + st.id +  '">' + st.name + '</a></td><td>' + ($.fn.func = function(){if(st.allegiance == null){return "Unknown"}else{return st.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(st.distance_to_star == null){return "--"}else{return Math.round(st.distance_to_star) + ' Ls'}})() + '</td><td>Maybe</td>');
+				table.append('<tr><td>' + sy.name + '</td><td><a href="http://eddb.io/station/' + st.id +  '">' + st.name + '</a></td><td>' + ($.fn.func = function(){if(st.allegiance == null){return "Unknown"}else{return st.allegiance}})() + '</td><td>' + Math.round10(distance_to_star($.bmdata.current_sy, sy), -2) + ' Ly</td><td>' + ($.fn.func = function(){if(st.distance_to_star == null){return "--"}else{return Math.round(st.distance_to_star) + ' Ls'}})() + '</td><td>' + ($.fn.func = function(){if(st.max_landing_pad_size == null){return "--"}else{return st.max_landing_pad_size}}) + '</td><td>Maybe</td>');
 			}
 		});
 	});
